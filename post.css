@@ -391,3 +391,113 @@
   .download-buttons { flex-direction: column; }
   .btn-dl { width: 100%; justify-content: center; }
 }
+
+/* ==========================================================================
+   BENCHMARK ENHANCEMENTS: CERTIFIED CLEAN SHIELD & PLATFORM SWITCHER TABS
+   ========================================================================== */
+.trust-security-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--download-green);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin: 22px 0 24px;
+}
+.tsc-icon {
+  font-size: 2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.tsc-content {
+  flex: 1;
+}
+.tsc-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.tsc-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.tsc-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tsc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--download-green);
+}
+.dl-platform-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--border-color);
+}
+.dl-platform-tab {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.dl-platform-tab:hover {
+  border-color: var(--primary-blue);
+  color: var(--text-main);
+}
+.dl-platform-tab.is-active {
+  background: var(--primary-blue);
+  color: #ffffff;
+  border-color: var(--primary-blue);
+  box-shadow: var(--shadow-xs);
+}
+.terminal-code-wrap {
+  position: relative;
+  margin: 16px 0;
+}
+.terminal-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #f8fafc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.terminal-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #ffffff;
+}
+.terminal-copy-btn.copied {
+  background: var(--download-green);
+  border-color: var(--download-green);
+  color: #ffffff;
+}

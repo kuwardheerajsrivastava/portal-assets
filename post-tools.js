@@ -45,6 +45,126 @@
     });
   });
 
+  /* Dynamic Multi-OS Platform Switcher for #download-box (FileHippo & SourceForge Inspired) */
+  var dlBox = document.getElementById('download-box');
+  if (dlBox) {
+    var btnsContainer = dlBox.querySelector('.download-buttons');
+    if (btnsContainer) {
+      var dlLinks = Array.prototype.slice.call(btnsContainer.querySelectorAll('a.btn-dl'));
+      if (dlLinks.length > 2) {
+        var platforms = {
+          'windows': { label: 'Windows', count: 0 },
+          'mac': { label: 'macOS', count: 0 },
+          'linux': { label: 'Linux', count: 0 },
+          'android': { label: 'Android', count: 0 }
+        };
+
+        dlLinks.forEach(function(link) {
+          var t = (link.textContent || '').toLowerCase();
+          var href = (link.href || '').toLowerCase();
+          var matched = false;
+          if (t.indexOf('win') !== -1 || t.indexOf('.exe') !== -1 || t.indexOf('.msi') !== -1 || href.indexOf('.exe') !== -1 || href.indexOf('.msi') !== -1) {
+            link.setAttribute('data-os', 'windows');
+            platforms.windows.count++;
+            matched = true;
+          }
+          if (t.indexOf('mac') !== -1 || t.indexOf('dmg') !== -1 || href.indexOf('.dmg') !== -1 || t.indexOf('apple silicon') !== -1) {
+            link.setAttribute('data-os', 'mac');
+            platforms.mac.count++;
+            matched = true;
+          }
+          if (t.indexOf('linux') !== -1 || t.indexOf('appimage') !== -1 || t.indexOf('.deb') !== -1 || t.indexOf('.rpm') !== -1 || t.indexOf('.tar') !== -1) {
+            link.setAttribute('data-os', 'linux');
+            platforms.linux.count++;
+            matched = true;
+          }
+          if (t.indexOf('android') !== -1 || t.indexOf('apk') !== -1 || href.indexOf('.apk') !== -1) {
+            link.setAttribute('data-os', 'android');
+            platforms.android.count++;
+            matched = true;
+          }
+          if (!matched) {
+            link.setAttribute('data-os', 'other');
+          }
+        });
+
+        var activePlatforms = Object.keys(platforms).filter(function(k) { return platforms[k].count > 0; });
+        if (activePlatforms.length > 1) {
+          var tabsWrap = document.createElement('div');
+          tabsWrap.className = 'dl-platform-tabs';
+
+          var allTab = document.createElement('button');
+          allTab.type = 'button';
+          allTab.className = 'dl-platform-tab is-active';
+          allTab.textContent = 'All Downloads (' + dlLinks.length + ')';
+          tabsWrap.appendChild(allTab);
+
+          var tabBtns = [allTab];
+
+          activePlatforms.forEach(function(k) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'dl-platform-tab';
+            btn.textContent = platforms[k].label + ' (' + platforms[k].count + ')';
+            btn.setAttribute('data-filter', k);
+            tabsWrap.appendChild(btn);
+            tabBtns.push(btn);
+          });
+
+          tabsWrap.addEventListener('click', function(e) {
+            var target = e.target;
+            if (!target || !target.classList.contains('dl-platform-tab')) return;
+            tabBtns.forEach(function(b) { b.classList.remove('is-active'); });
+            target.classList.add('is-active');
+            var filter = target.getAttribute('data-filter');
+            dlLinks.forEach(function(link) {
+              if (!filter) {
+                link.style.display = '';
+              } else {
+                var os = link.getAttribute('data-os');
+                link.style.display = (os === filter) ? '' : 'none';
+              }
+            });
+          });
+
+          btnsContainer.parentNode.insertBefore(tabsWrap, btnsContainer);
+        }
+      }
+    }
+  }
+
+  /* Terminal Verification Command 1-Click Copy Helper (SourceForge & LO4D Inspired) */
+  var preBlocks = document.querySelectorAll('pre');
+  preBlocks.forEach(function(pre) {
+    var txt = pre.textContent || '';
+    if (txt.indexOf('Get-FileHash') !== -1 || txt.indexOf('certutil') !== -1 || txt.indexOf('shasum') !== -1 || txt.indexOf('sha256sum') !== -1) {
+      if (pre.parentNode && !pre.parentNode.classList.contains('terminal-code-wrap')) {
+        var wrap = document.createElement('div');
+        wrap.className = 'terminal-code-wrap';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+
+        var copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'terminal-copy-btn';
+        copyBtn.textContent = 'Copy Command';
+        copyBtn.onclick = function() {
+          if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+          navigator.clipboard.writeText(txt.trim()).then(function() {
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(function() {
+              copyBtn.textContent = 'Copy Command';
+              copyBtn.classList.remove('copied');
+            }, 2000);
+          });
+        };
+        wrap.appendChild(copyBtn);
+      }
+    }
+  });
+
+
   var FIREBASE_URL = 'https://oneclickdownload-ratings-default-rtdb.asia-southeast1.firebasedatabase.app';
   var starPicker = document.getElementById('ocd-star-picker');
   var statsEl = document.getElementById('ocd-rating-stats');
