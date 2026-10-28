@@ -1,0 +1,38 @@
+/* One Click Download India - 404 Error Recovery Page CSS */
+.error-recovery-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  max-width: 720px;
+  margin: 24px auto;
+  box-shadow: var(--shadow-xs);
+}
+.error-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  background: var(--badge-os);
+  color: var(--badge-os-text);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.error-title { font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+.error-description { font-size: 0.92rem; color: var(--text-muted); max-width: 540px; margin: 0 auto 24px; }
+.error-search-wrap { max-width: 480px; margin: 0 auto 28px; }
+.error-search-box { display: flex; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+.error-search-box input { flex: 1; background: transparent; border: none; padding: 12px 16px; font-size: 0.9rem; color: var(--text-main); outline: none; }
+.error-search-box button { background: var(--primary-blue); color: #ffffff; border: none; padding: 0 20px; font-weight: 700; cursor: pointer; }
+.error-top-downloads { border-top: 1px solid var(--border-color); padding-top: 22px; }
+.error-top-downloads h3 { font-size: 1rem; color: var(--text-main); margin-bottom: 14px; }
+.error-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.error-card { display: flex; flex-direction: column; align-items: center; padding: 14px 10px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); }
+.error-card:hover { border-color: var(--primary-blue); }
+.error-card-icon { font-size: 1.4rem; margin-bottom: 4px; }
+.error-card strong { font-size: 0.88rem; }
+.error-card span { font-size: 0.74rem; color: var(--text-muted); font-family: var(--font-mono); }
+.error-home-wrap { margin-top: 24px; }
+.btn-dl { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.88rem; background: var(--primary-blue); color: #ffffff; }
